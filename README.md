@@ -3,7 +3,8 @@
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
-**Implemented in Numpy, which was written in C for fast processing speed**
+
+** This library is implemented in Numpy (which was written in C) for fast processing speed**
 
 
 
