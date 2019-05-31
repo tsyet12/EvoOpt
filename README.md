@@ -1,4 +1,4 @@
-# Moptimal
+# EvoOpt
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
 
 # Current support for algorithms:
