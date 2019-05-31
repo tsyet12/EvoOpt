@@ -5,7 +5,7 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [x] Genetic Algorithm
 
-[X] Duelist Algorithm
+[x] Duelist Algorithm
 
 [ ] Particle Swarm Optimization
 
