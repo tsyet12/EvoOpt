@@ -21,4 +21,8 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 [ ] Grey-Wolf Optimization
 
 
-# WORK IN PROGRESS
+# Results
+![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
+
+
+# More Updates to Come
