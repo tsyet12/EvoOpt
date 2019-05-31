@@ -1,3 +1,12 @@
+'''Genetic Algorithm
+###
+###Code and Implementation by Sin Yong, Teng
+###
+###
+###Implemented on 31/05/2019
+'''
+
+
 import numpy as np
 import matplotlib.pyplot as mp
 
