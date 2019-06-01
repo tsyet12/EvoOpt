@@ -213,27 +213,39 @@ class DuelistAlgorithm():
 	
 	@property
 	def plot_result(self,contour_density=50):
+		subtitle_font=16
+		axis_font=14
+		title_weight="bold"
+		axis_weight="bold"
+		tick_font=14
+		
 		fig=mp.figure()
-
+		fig.suptitle("Duelist Algorithm Optimization", fontsize=20, fontweight=title_weight)
+		fig.tight_layout()
+		mp.subplots_adjust(hspace=0.3,wspace=0.3)
+		mp.rc('xtick',labelsize=tick_font)
+		mp.rc('ytick',labelsize=tick_font)
 		mp.subplot(2,2,1)
 		mp.plot(self.plotgen,self.plotfit)
-		mp.title("Duelist Algorithm Optimization")
-		mp.xlabel("Number of Generation")
-		mp.ylabel("Fitness of Best Solution")
-		mp.autoscale
+		mp.title("Convergence Curve", fontsize=subtitle_font,fontweight=title_weight)
+		mp.xlabel("Number of Generation",fontsize=axis_font, fontweight=axis_weight)
+		mp.ylabel("Fitness of Best Solution",fontsize=axis_font, fontweight=axis_weight)
+		mp.autoscale()
+		
+		
 		mp.subplot(2,2,2)
 		mp.plot(self.plotgen,[x[0] for x in self.overall_bestdomain])
-		mp.title("Duelist Algorithm Optimization")
-		mp.xlabel("Number of Generation")
-		mp.ylabel("Variable in the First Dimension")
+		mp.title("Trajectory in the First Dimension",fontsize=subtitle_font,fontweight=title_weight)
+		mp.xlabel("Number of Generation",fontsize=axis_font, fontweight=axis_weight)
+		mp.ylabel("Variable in the First Dimension",fontsize=axis_font, fontweight=axis_weight)
 		mp.autoscale()
 
 
 		mp.subplot(2,2,3)
 		mp.plot(self.plotgen, self.average_fit)
-		mp.title("Duelist Algorithm Optimization")
-		mp.xlabel("Number of Generation")
-		mp.ylabel("Average Fitness of Population")
+		mp.title("Average Fitness during Convergence",fontsize=subtitle_font,fontweight=title_weight)
+		mp.xlabel("Number of Generation",fontsize=axis_font, fontweight=axis_weight)
+		mp.ylabel("Average Fitness of Population",fontsize=axis_font, fontweight=axis_weight)
 
 
 		mp.subplot(2,2,4)      
@@ -251,11 +263,13 @@ class DuelistAlgorithm():
 			
 		for y in cont_y:
 			cont_z.append([self.f(x,y,*average_other) for x in cont_x])            
-		mp.contour(cont_x,cont_y,cont_z)
-		mp.plot(self.history1,self.history2,'bo')
-		mp.title("Duelist Algorithm Optimization")
-		mp.ylabel("Points Evaluated in Second Dimension")
-		mp.xlabel("Points Evaluated in First Dimension")
+
+		mp.plot(self.history1,self.history2,'bo', markersize=3,alpha=0.4)
+		CS=mp.contour(cont_x,cont_y,cont_z)
+		mp.clabel(CS,inline=True,inline_spacing=-10,fontsize=10)
+		mp.title("Points Evaluated",fontsize=subtitle_font,fontweight=title_weight)
+		mp.ylabel("Second Dimension",fontsize=axis_font, fontweight=axis_weight)
+		mp.xlabel("First Dimension",fontsize=axis_font, fontweight=axis_weight)
 		mp.autoscale()
 
 		mng = mp.get_current_fig_manager()
