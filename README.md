@@ -14,7 +14,7 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [x] Duelist Algorithm
 
-[ ] Particle Swarm Optimization
+[X] Particle Swarm Optimization
 
 [ ] Multi-Verse Optimization
 
