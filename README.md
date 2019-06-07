@@ -16,6 +16,10 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [X] Particle Swarm Optimization
 
+[X] Gravitational Search Algorithm
+
+[X] Firefly Algorithm
+
 [ ] Multi-Verse Optimization
 
 [ ] Grey-Wolf Optimization
