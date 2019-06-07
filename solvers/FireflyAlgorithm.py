@@ -6,25 +6,35 @@
 ###Implemented on 1/06/2019
 '''
 
-
 import numpy as np
 import matplotlib.pyplot as mp
+import time
 
-class ParticleSwarmOptimization():
-    def __init__(self,f,x,lb,ub,pop=200, max_gen=50,w=0.9,c1=2,c2=1,verbose=True):
+class FireflyAlgorithm():
+    def __init__(self,f,x,lb,ub,pop=200, max_gen=50,alpha=0.2,gamma=1,B0=1,Bmin=0.2, d=0.97,gaussian_steps=True,approximate_exp=False, initial_correction=True,verbose=True):
         self.f=np.vectorize(f)
         self.x=x
         self.lb=lb
         self.ub=ub
         self.pop=pop
         self.max_gen=max_gen
-        self.w=w
-        self.c1=c1
-        self.c2=c2
+        self.Bmin=Bmin
+        
+        self.initial_correction=initial_correction
+        self.alpha=(np.full(self.max_gen+1,alpha)*d**(np.arange(self.max_gen+1)))
+        self.gamma=gamma
+        self.B0=B0
+        self.gaussian_steps=gaussian_steps
+        self.d=d
+        self.approximate_exp=approximate_exp
+        
+        np.random.seed(int(time.time()))
         self.pop_mat=np.tile(self.lb,(pop,1))+np.random.rand(pop,len(x)).astype(np.longdouble)*(np.tile(self.ub,(pop,1))-np.tile(self.lb,(pop,1)))
         self.velocity=np.random.uniform(-1,1,self.pop_mat.shape).astype(np.longdouble)*(np.tile(self.ub,(pop,1))-np.tile(self.lb,(pop,1)))
         self.verbose=verbose
-
+        
+        self.scale=np.tile(np.asarray(self.ub),self.pop).reshape(self.pop_mat.shape)-np.tile(np.asarray(self.lb),self.pop).reshape(self.pop_mat.shape)
+        self.scale_low=np.tile(np.asarray(self.lb),self.pop).reshape(self.pop_mat.shape)
         self.plotgen=[]
         self.average_fit=[]
         self.best_result=[]
@@ -33,56 +43,70 @@ class ParticleSwarmOptimization():
         self.overall_bestdomain=[]
         self.history1=self.pop_mat[:,0]
         self.history2=self.pop_mat[:,1]
-        self.velocity_history=np.copy(self.velocity)
         
     def solve(self):
-        self.evaluate(initial=True)
-        self.update_velocity_position()
+        self.evaluate()
         for i in range(self.max_gen+1):
-            self.update_velocity_position()
+            self.update(generation=i)
             self.evaluate()
             if self.verbose:
                 self.log_result(i)
             
     
     def evaluate(self,initial=False):
+        #print('pop',self.pop_mat)
         #get fitness of all population
         self.pop_mat_fit=self.f(*self.pop_mat.T)
-
         #concatenate and sort population by fitness
         temp_mat=np.concatenate((np.asarray(self.pop_mat_fit).reshape(self.pop_mat_fit.shape[0],1),self.pop_mat),axis=1)
-        
-        #update local best position for all searchers
-        if initial:
-            #initialize local best if it is the 0th iteration
-            self.local_best_position=np.copy(temp_mat)
-        else:
-            #for other iterations, compare if new point is better than local best. If yes, then update local best by new point
-            for i in range(self.local_best_position.shape[0]):
-                if temp_mat[i,0]<self.local_best_position[i,0]:
-                    self.local_best_position[i,:]=temp_mat[i,:]
         
         #sort new points by fitness
         temp_mat=temp_mat[temp_mat[:,0].argsort()]  
         
-        sorted_local_best_position=self.local_best_position[self.local_best_position[:,0].argsort()]
+        #return the sorted values to pop matrix
+        self.pop_mat_fit, self.pop_mat= np.copy(temp_mat[:,0]), np.copy(temp_mat[:,1:])
         
-        #update global best
-        self.global_best_fit, self.global_best_domain=sorted_local_best_position[0,0], sorted_local_best_position[0,1:]
-        #print(self.global_best_fit)
+    def update(self,generation):
+
+        R=np.sum([(self.pop_mat[:,i,None] - self.pop_mat[:,i])**2 for i in range(len(self.x))],axis=0) 
+        Intensity=np.tile(self.pop_mat_fit,self.pop).reshape(self.pop,self.pop)
+         
+        '''
+        ###DEBUG###
+        print('R',R)
+        print('I',Intensity)
+        print('IT',Intensity.T)
+        print('corrected R=', np.exp(-self.gamma*R))
+        print('corrected IR=', Intensity * np.exp(-self.gamma*R))
+        '''
         
+        Intensity_condition=((Intensity.T )<Intensity).astype(int)
+        X=np.subtract(self.pop_mat[np.newaxis,:],self.pop_mat[:,np.newaxis])
+
+        if self.gaussian_steps:
+            rand=(np.random.normal(loc=0,scale=0.5,size=self.pop_mat.shape))*self.scale
+        else:
+            rand=(np.random.rand(*self.pop_mat.shape)-0.5)*self.scale
         
-    def update_velocity_position(self):
-        rp=np.random.rand(*self.pop_mat.shape)
-        rg=np.random.rand(*self.pop_mat.shape)
-        
-        self.velocity=self.w * self.velocity+ self.c1* rp * (self.local_best_position[:,1:]-self.pop_mat) \
-        + self.c2* rg * (self.global_best_domain - self.pop_mat)
-        #print(self.velocity)
-        
-        self.pop_mat=self.pop_mat+self.velocity
-        self.pop_mat=np.clip(self.pop_mat,np.tile(self.lb,(self.pop_mat.shape[0],1)),np.tile(self.ub,(self.pop_mat.shape[0],1)))
-        
+        if self.initial_correction:
+            correction=(np.sum((self.B0-self.Bmin)*(R)+self.Bmin,axis=1))
+        else:
+            correction=0
+            
+        if self.approximate_exp:
+            R=1/(1+self.gamma*np.repeat(R*Intensity_condition,len(self.x),axis=1).reshape(X.shape))
+            if self.initial_correction:
+                self.pop_mat=(np.sum((self.B0-self.Bmin)*(R)+self.Bmin,axis=1))*self.pop_mat+np.sum(((self.B0-self.Bmin)*(R)+self.Bmin)*X,axis=1)+self.alpha[generation]*(rand)
+            else:
+                self.pop_mat=self.pop_mat+np.sum(((self.B0-self.Bmin)*(R)+self.Bmin)*X,axis=1)+self.alpha[generation]*(rand)
+        else:
+            R=np.repeat(np.exp(-self.gamma*R)*Intensity_condition,len(self.x),axis=1).reshape(X.shape)
+            if self.initial_correction:
+                self.pop_mat=(np.sum((self.B0-self.Bmin)*(R)+self.Bmin,axis=1))*self.pop_mat+np.sum(((self.B0-self.Bmin)*(R)+self.Bmin)*X,axis=1)+self.alpha[generation]*(rand)
+            else:
+                self.pop_mat=self.pop_mat+np.sum(((self.B0-self.Bmin)*(R)+self.Bmin)*X,axis=1)+self.alpha[generation]*(rand)            
+        self.pop_mat=np.clip(self.pop_mat,self.lb,self.ub)
+
     def log_result(self,generation):
         print("Generation #",generation,"Best Fitness=", self.pop_mat_fit[0], "Answer=", self.pop_mat[0])
         self.plotgen.append(generation)
@@ -97,12 +121,10 @@ class ParticleSwarmOptimization():
         
         self.history1=np.concatenate((self.history1,self.pop_mat[:,0]),axis=0)
         self.history2=np.concatenate((self.history2,self.pop_mat[:,1]),axis=0)
-        self.velocity_history=np.concatenate((self.velocity_history,self.velocity),axis=0)
-        
-        
+        if generation==self.max_gen:
+            print("Final Best Fitness=",self.overall_best[-1],"Answer=",self.best_domain[-1])
             
-            
-
+    
     def plot_result(self,contour_density=50):
         subtitle_font=16
         axis_font=14
@@ -113,7 +135,7 @@ class ParticleSwarmOptimization():
 		
         fig=mp.figure()
         
-        fig.suptitle("Particle Swarm Optimization", fontsize=20, fontweight=title_weight)
+        fig.suptitle("Firefly Algorithm Optimization", fontsize=20, fontweight=title_weight)
         fig.tight_layout()
         mp.subplots_adjust(hspace=0.3,wspace=0.3)
         mp.rc('xtick',labelsize=tick_font)
@@ -171,13 +193,14 @@ class ParticleSwarmOptimization():
 
 if __name__=="__main__":
 
-    def f(x1,x2,x3):
-        return (x1+x2)/(x3+0.000000000001)
-    #(self,f,x,lb,ub,pop=200, max_gen=50,w=0.9,c1=2,c2=1,verbose=True):
-    pso=ParticleSwarmOptimization(f,["x1","x2","x3"],[0,0,0],[100,100,100],pop=200,max_gen=200,w=0.9,c1=2,c2=1,verbose=True)
-    pso.solve()
-    pso.plot_result()   
-    
+    def f(x1,x2):
+        return ((x1-30)**2+(x2-20)**2+50)
+
+    #    (self,f,x,lb,ub,pop=200, max_gen=50,alpha=0.2,gamma=1,B0=1,verbose=True):
+    FA=FireflyAlgorithm(f,["x1","x2"],[-100,-150],[200,200],pop=200,max_gen=50,alpha=0.2,gamma=1,B0=1, Bmin=0, d=0.97,gaussian_steps=True,approximate_exp=False,initial_correction=True,verbose=True)
+    FA.solve()
+    FA.plot_result()   
+
        
         
 

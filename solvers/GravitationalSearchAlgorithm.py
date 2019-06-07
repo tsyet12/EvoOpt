@@ -1,30 +1,33 @@
-'''Particle Swarm Optimization
+'''Gravitational Search Algorithm
 ###
 ###Code and Implementation by Sin Yong, Teng
 ###
 ###
-###Implemented on 1/06/2019
+###Implemented on 06/06/2019
 '''
-
 
 import numpy as np
 import matplotlib.pyplot as mp
+import time
 
-class ParticleSwarmOptimization():
-    def __init__(self,f,x,lb,ub,pop=200, max_gen=50,w=0.9,c1=2,c2=1,verbose=True):
+class GravitationalSearchAlgorithm():
+    def __init__(self,f,x,lb,ub,pop=200, max_gen=500,G0=100,a=20,Kbest_min=2,verbose=True):
         self.f=np.vectorize(f)
         self.x=x
         self.lb=lb
         self.ub=ub
         self.pop=pop
         self.max_gen=max_gen
-        self.w=w
-        self.c1=c1
-        self.c2=c2
+        self.G=G0*np.exp(-a*np.arange(self.max_gen+1)/(self.max_gen+1))
+        self.a=a
+        self.Kbest_min=Kbest_min
+        self.K=np.rint(np.full(self.max_gen+1,self.pop)-((self.pop-self.Kbest_min)/(self.max_gen))*(np.arange(self.max_gen+1))).astype(int)
+        np.random.seed(int(time.time()))
         self.pop_mat=np.tile(self.lb,(pop,1))+np.random.rand(pop,len(x)).astype(np.longdouble)*(np.tile(self.ub,(pop,1))-np.tile(self.lb,(pop,1)))
         self.velocity=np.random.uniform(-1,1,self.pop_mat.shape).astype(np.longdouble)*(np.tile(self.ub,(pop,1))-np.tile(self.lb,(pop,1)))
+        
         self.verbose=verbose
-
+        
         self.plotgen=[]
         self.average_fit=[]
         self.best_result=[]
@@ -34,55 +37,76 @@ class ParticleSwarmOptimization():
         self.history1=self.pop_mat[:,0]
         self.history2=self.pop_mat[:,1]
         self.velocity_history=np.copy(self.velocity)
-        
     def solve(self):
-        self.evaluate(initial=True)
-        self.update_velocity_position()
+        self.evaluate()
         for i in range(self.max_gen+1):
-            self.update_velocity_position()
+            self.update(generation=i)
             self.evaluate()
             if self.verbose:
-                self.log_result(i)
-            
+                self.log_result(generation=i)
     
     def evaluate(self,initial=False):
+
         #get fitness of all population
         self.pop_mat_fit=self.f(*self.pop_mat.T)
 
         #concatenate and sort population by fitness
         temp_mat=np.concatenate((np.asarray(self.pop_mat_fit).reshape(self.pop_mat_fit.shape[0],1),self.pop_mat),axis=1)
-        
-        #update local best position for all searchers
-        if initial:
-            #initialize local best if it is the 0th iteration
-            self.local_best_position=np.copy(temp_mat)
-        else:
-            #for other iterations, compare if new point is better than local best. If yes, then update local best by new point
-            for i in range(self.local_best_position.shape[0]):
-                if temp_mat[i,0]<self.local_best_position[i,0]:
-                    self.local_best_position[i,:]=temp_mat[i,:]
-        
+
         #sort new points by fitness
-        temp_mat=temp_mat[temp_mat[:,0].argsort()]  
+        temp_mat=(temp_mat[temp_mat[:,0].argsort()])
+
+        #return the sorted values to pop matrix
+        self.pop_mat_fit, self.pop_mat= np.copy(temp_mat[:,0]), np.copy(temp_mat[:,1:])
+               
+        #min max normalization
+        temp_mat[:,0]=(temp_mat[:,0]-self.pop_mat_fit[-1])/(self.pop_mat_fit[0]-self.pop_mat_fit[-1]+np.finfo(np.float64).eps)
+
+        #assign mass
+        self.mass_mat=temp_mat[:,0]/(temp_mat[:,0].sum()+np.finfo(np.float64).eps)
+
         
-        sorted_local_best_position=self.local_best_position[self.local_best_position[:,0].argsort()]
+    def update(self, generation):
+        #compute Euclidian Distance
+        R=np.sqrt(np.sum([(self.pop_mat[:,i,None] - self.pop_mat[:,i])**2 for i in range(len(self.x))],axis=0) )
+        #compute displacement
+        X=np.subtract(self.pop_mat[np.newaxis,:],self.pop_mat[:,np.newaxis])
         
-        #update global best
-        self.global_best_fit, self.global_best_domain=sorted_local_best_position[0,0], sorted_local_best_position[0,1:]
-        #print(self.global_best_fit)
         
+        #Removing masses that dont matter
+        screened_mass=np.zeros_like(self.mass_mat)       
+        screened_mass[:self.K[generation]]=self.mass_mat[:self.K[generation]]
+        screened_mass=np.tile(screened_mass,len(self.x)).reshape(len(self.x),self.pop).T
         
-    def update_velocity_position(self):
-        rp=np.random.rand(*self.pop_mat.shape)
-        rg=np.random.rand(*self.pop_mat.shape)
+        #Defining the random effects on force/acceleration
+        a_rand=np.tile(np.random.rand(R.shape[0]),R.shape[1]).reshape(R.shape)
+        v_rand=np.tile(np.random.rand(self.velocity.shape[1]),self.velocity.shape[0]).reshape(self.velocity.shape)
+
+        #pre-calculate 1/R*X
+        R=a_rand/(R+np.finfo(np.float64).eps)
+        R=np.repeat(R,len(self.x),axis=1).reshape(X.shape)
         
-        self.velocity=self.w * self.velocity+ self.c1* rp * (self.local_best_position[:,1:]-self.pop_mat) \
-        + self.c2* rg * (self.global_best_domain - self.pop_mat)
-        #print(self.velocity)
+        '''
+        DEBUG
         
-        self.pop_mat=self.pop_mat+self.velocity
-        self.pop_mat=np.clip(self.pop_mat,np.tile(self.lb,(self.pop_mat.shape[0],1)),np.tile(self.ub,(self.pop_mat.shape[0],1)))
+        print('pop_mat=',self.pop_mat)
+        print('screened_mass=',screened_mass)
+        print('screened_mass=',screened_mass[0,:])
+        print('R=',R)
+        print('X',X)
+        print('X1',screened_mass*X)
+        print('X1',R*screened_mass*X)
+        print('X1',self.G[generation]*np.sum(R*screened_mass*X,axis=1))
         
+        '''
+
+        #Calculating acceleration by crossing out the mass of attraction body
+        a=self.G[generation]*np.sum(R*screened_mass*X,axis=1)
+        
+        #update velocity and displacement
+        self.velocity=v_rand*self.velocity+a
+        self.pop_mat=np.clip(self.pop_mat+self.velocity,self.lb,self.ub)
+
     def log_result(self,generation):
         print("Generation #",generation,"Best Fitness=", self.pop_mat_fit[0], "Answer=", self.pop_mat[0])
         self.plotgen.append(generation)
@@ -99,10 +123,10 @@ class ParticleSwarmOptimization():
         self.history2=np.concatenate((self.history2,self.pop_mat[:,1]),axis=0)
         self.velocity_history=np.concatenate((self.velocity_history,self.velocity),axis=0)
         
-        
+        if generation==self.max_gen:
+            print("Final Best Fitness=",self.overall_best[-1],"Answer=",self.best_domain[-1])
             
             
-
     def plot_result(self,contour_density=50):
         subtitle_font=16
         axis_font=14
@@ -113,7 +137,7 @@ class ParticleSwarmOptimization():
 		
         fig=mp.figure()
         
-        fig.suptitle("Particle Swarm Optimization", fontsize=20, fontweight=title_weight)
+        fig.suptitle("Gravitational Search Algorithm Optimization", fontsize=20, fontweight=title_weight)
         fig.tight_layout()
         mp.subplots_adjust(hspace=0.3,wspace=0.3)
         mp.rc('xtick',labelsize=tick_font)
@@ -168,15 +192,18 @@ class ParticleSwarmOptimization():
         mng = mp.get_current_fig_manager()
         mng.window.state('zoomed')
         mp.show()
+        
 
 if __name__=="__main__":
 
     def f(x1,x2,x3):
-        return (x1+x2)/(x3+0.000000000001)
-    #(self,f,x,lb,ub,pop=200, max_gen=50,w=0.9,c1=2,c2=1,verbose=True):
-    pso=ParticleSwarmOptimization(f,["x1","x2","x3"],[0,0,0],[100,100,100],pop=200,max_gen=200,w=0.9,c1=2,c2=1,verbose=True)
-    pso.solve()
-    pso.plot_result()   
+        return (x2+(x1-50)**2)/(x3+5)
+      
+    #(self,f,x,lb,ub,pop=200, max_gen=50,G0=100,a=20,Kbest_min=1,verbose=True)
+    
+    gsa=GravitationalSearchAlgorithm(f,["x1","x2",'x3'],[0,0,0],[100,100,100],pop=200,max_gen=500,G0=100,a=20,Kbest_min=1,verbose=True)
+    gsa.solve()
+    gsa.plot_result()   
     
        
         

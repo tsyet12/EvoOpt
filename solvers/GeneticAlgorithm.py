@@ -133,7 +133,7 @@ class GeneticAlgorithm():
             
             
             
-    @property
+
     def plot_result(self,contour_density=50):
         subtitle_font=16
         axis_font=14
@@ -203,7 +203,8 @@ class GeneticAlgorithm():
 if __name__=="__main__":
 
     def f(x1,x2,x3):
-        return (x1+x2)/x3
+        y=x1+x3+x2*x2
+        return y
     
     ga=GeneticAlgorithm(f,["x1","x2","x3"],[0,0,5],[100,50,100],pop=200,max_gen=50,mut_prob=0.05,cross_prob=0.5,num_elite=2,verbose=True, roll_cross=-1)
     ga.solve()

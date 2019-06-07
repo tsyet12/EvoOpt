@@ -211,7 +211,7 @@ class DuelistAlgorithm():
 			mp.autoscale()
 			mp.show()
 	
-	@property
+
 	def plot_result(self,contour_density=50):
 		subtitle_font=16
 		axis_font=14
