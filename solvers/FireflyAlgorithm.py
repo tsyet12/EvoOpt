@@ -1,4 +1,4 @@
-'''Particle Swarm Optimization
+'''Firefly Algorithm
 ###
 ###Code and Implementation by Sin Yong, Teng
 ###
