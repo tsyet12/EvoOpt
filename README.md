@@ -2,7 +2,7 @@
 
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
 
-(https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
+![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
 
