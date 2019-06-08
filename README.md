@@ -32,6 +32,68 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [ ] Grey-Wolf Optimization
 
+# Quick Example
+
+# Short Tutorial
+
+**There are four simple steps to run an optimization problem using Duelist Algorithm**
+
+(Example 2 from example folder)
+
+** Prerequisites **
+
+```python
+from solver.DuelistAlgorithm import DuelistAlgorithm
+```
+
+** 1. Define your function. Say you want to minimize the equation f=(x1,x2) = (x1)^2+(x2)^2 **
+
+```python
+def f(x1,x2):
+	return x1*x1+x2*x2
+```
+
+** 2. Define the variables that can be *manipulated* for optimization. Define their names as string and put them in an array. **
+
+```python
+x=["x1","x2"]
+```
+
+** 3. Define the boundaries for the manipulated variables:**
+
+ Say:
+
+ x1 is bounded from -2 to 10 (-2 is min value of x1 and 10 is max value of x1)
+
+ x2 is bounded from 10 to 15 (10 is min value of x2 and 15 is max value of x2)
+ 
+  We can arrange these boundaries according to the definition array in step 2.
+  
+ | Variables | x1 | x2 |
+ | :---: | :---: | :---: |
+ | Min | -2 | 5 |
+ | Max | 10 | 15 |
+
+The corresponding code is:
+
+```python
+ xmin=[-2,5]
+ xmax=[10,15]
+```
+
+** 4. Setup the solver and start the solve procedure. **
+
+```python
+DA=DuelistAlgorithm(f,x,xmin,xmax,max_gen=1000)
+DA.solve(plot=True)
+```
+
+
+# Results
+![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
+
+
+
 # Dependencies
 Numpy and Matplotlib
 
@@ -95,9 +157,6 @@ Windows:
 $ python -m pip install EvoOpt
 ```
 
-
-# Results
-![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
 
 
 # More Updates to Come
