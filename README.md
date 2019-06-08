@@ -49,7 +49,7 @@ $pip install numpy matplotlib
 ```
 
 
-#Installing EvoOpt
+# Installing EvoOpt
 
 You can use two methods for installation:
 
