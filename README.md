@@ -3,6 +3,9 @@
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
 
 ![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
+![PyPI](https://img.shields.io/pypi/v/EvoOpt.svg?color=green) 
+![PyPI-Implementation](https://img.shields.io/pypi/implementation/EvoOpt.svg)
+![Python Version](https://img.shields.io/pypi/pyversions/EvoOpt.svg)
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
 
