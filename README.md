@@ -35,11 +35,11 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 # Dependencies
 Numpy and Matplotlib
 
-'''Python
+```Bash
 
 $python -m pip install numpy matplotlib
 
-'''
+```
 
 
 # Results
