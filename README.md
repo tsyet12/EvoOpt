@@ -7,7 +7,7 @@
 ![dependencies](https://img.shields.io/librariesio/github/tsyet12/EvoOpt.svg)
 ![PyPI-Implementation](https://img.shields.io/pypi/implementation/EvoOpt.svg)
 ![Python Version](https://img.shields.io/pypi/pyversions/EvoOpt.svg)
-![License] (https://img.shields.io/pypi/l/EvoOpt.svg?color=Green)
+![PyPI-License](https://img.shields.io/pypi/l/EvoOpt.svg?color=Green)
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
 
