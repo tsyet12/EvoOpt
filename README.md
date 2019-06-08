@@ -3,6 +3,7 @@
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
 
 ![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
+![PyPI-Status](https://img.shields.io/pypi/status/EvoOpt.svg?color=blue)
 ![PyPI](https://img.shields.io/pypi/v/EvoOpt.svg?color=green) 
 ![dependencies](https://img.shields.io/librariesio/github/tsyet12/EvoOpt.svg)
 ![PyPI-Implementation](https://img.shields.io/pypi/implementation/EvoOpt.svg)
