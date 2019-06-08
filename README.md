@@ -28,6 +28,8 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [X] Firefly Algorithm
 
+[X] Simulated Annealing
+
 [ ] Multi-Verse Optimization
 
 [ ] Grey-Wolf Optimization
