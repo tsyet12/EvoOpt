@@ -34,9 +34,7 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 # Quick Example
 
-# Short Tutorial
-
-**There are four simple steps to run an optimization problem using Duelist Algorithm**
+**There are four simple steps to run an optimization problem using EvoOpt**
 
 (Example 2 from example folder)
 
