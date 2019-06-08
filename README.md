@@ -35,10 +35,64 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 # Dependencies
 Numpy and Matplotlib
 
+Windows:
 ```Bash
 
 $python -m pip install numpy matplotlib
 
+```
+
+Linux:
+
+```Bash
+$pip install numpy matplotlib
+```
+
+
+#Installing EvoOpt
+
+You can use two methods for installation:
+
+**1. Install from github (recommended as this will download the newest version)**
+
+First download the git repository. You can do this by clicking the download button or using the git command:
+```BASH
+$ git pull https://github.com/tsyet12/EvoOpt
+```
+<b>
+  
+Move to the directory:
+  
+```BASH
+$ cd (directory of EvoOpt)
+```
+
+Run setup. The following command installs all files in directory:
+
+```BASH
+$ pip install -e .
+```
+
+Move to examples and run the examples
+
+```BASH
+$ cd examples
+```
+
+**1. Install from pip **
+
+You can install this package from pip. 
+
+Linux:
+
+```BASH
+$ pip install EvoOpt
+```
+
+Windows:
+
+```BASH
+$ python -m pip install EvoOpt
 ```
 
 
