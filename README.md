@@ -1,6 +1,19 @@
 # EvoOpt - Evolutionary Optimization in Python
 
+
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
+<h3 align="center"> EvoOpt: Evolutionary Optimization in Python </h3>
+
+<div id="Navigation">
+<p align="center">
+	* Open sourced * Automatically Vectorized * Fast Computation * One Library Do-it-all
+	<br/>
+	<h3 align="center"><a href="https://github.com/tsyet12/issues">Report Bug</a>
+		 · 
+		<a href="https://github.com/tsyet12/issues">      Request Feature</a></h3>
+</p>
+</div>
+
 
 ![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
 ![PyPI-Status](https://img.shields.io/pypi/status/EvoOpt.svg?color=blue)
@@ -9,14 +22,34 @@
 ![PyPI-Implementation](https://img.shields.io/pypi/implementation/EvoOpt.svg)
 ![Python Version](https://img.shields.io/pypi/pyversions/EvoOpt.svg)
 ![PyPI-License](https://img.shields.io/pypi/l/EvoOpt.svg?color=Green)
+[![DOI](https://zenodo.org/badge/186832141.svg)](https://zenodo.org/badge/latestdoi/186832141)
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
 
-** This library is implemented in Numpy (which was written in C) for fast processing speed**
+**This library is implemented in Numpy (which was written in C) for fast processing speed**
+
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Current support for algorithms](#current-support-for-algorithms)
+* [Getting Started](#getting-started)
+  * [Dependencies](#dependencies)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
 
 
-# Current support for algorithms:
+## Current support for algorithms
 
 [x] Genetic Algorithm
 
@@ -28,36 +61,41 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [X] Firefly Algorithm
 
+[X] Simulated Annealing
+
 [ ] Multi-Verse Optimization
 
 [ ] Grey-Wolf Optimization
 
-# Quick Example
+More algorithms to come...
+
+<!-- GETTING STARTED -->
+## Getting Started
 
 **There are four simple steps to run an optimization problem using EvoOpt**
 
 (Example 2 from example folder)
 
-** Prerequisites **
+**Prerequisites**
 
 ```python
 from solver.DuelistAlgorithm import DuelistAlgorithm
 ```
 
-** 1. Define your function. Say you want to minimize the equation f=(x1,x2) = (x1)^2+(x2)^2 **
+**1. Define your function. Say you want to minimize the equation f=(x1,x2) = (x1)^2+(x2)^2 **
 
 ```python
 def f(x1,x2):
 	return x1*x1+x2*x2
 ```
 
-** 2. Define the variables that can be *manipulated* for optimization. Define their names as string and put them in an array. **
+**2. Define the variables that can be *manipulated* for optimization. Define their names as string and put them in an array. **
 
 ```python
 x=["x1","x2"]
 ```
 
-** 3. Define the boundaries for the manipulated variables:**
+**3. Define the boundaries for the manipulated variables:**
 
  Say:
 
@@ -79,7 +117,7 @@ The corresponding code is:
  xmax=[10,15]
 ```
 
-** 4. Setup the solver and start the solve procedure. **
+**4. Setup the solver and start the solve procedure. **
 
 ```python
 DA=DuelistAlgorithm(f,x,xmin,xmax,max_gen=1000)
@@ -87,12 +125,12 @@ DA.solve(plot=True)
 ```
 
 
-# Results
+**Example Result **
 ![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
 
 
 
-# Dependencies
+## Dependencies
 Numpy and Matplotlib
 
 Windows:
@@ -109,7 +147,7 @@ $pip install numpy matplotlib
 ```
 
 
-# Installing EvoOpt
+## Installation
 
 You can use two methods for installation:
 
@@ -133,11 +171,6 @@ Run setup. The following command installs all files in directory:
 $ pip install -e .
 ```
 
-Move to examples and run the examples
-
-```BASH
-$ cd examples
-```
 
 **1. Install from pip **
 
@@ -150,11 +183,42 @@ $ pip install EvoOpt
 ```
 
 Windows:
-
 ```BASH
-$ python -m pip install EvoOpt
+$python -m pip install EvoOpt
 ```
 
+<!-- USAGE EXAMPLES -->
+## Usage
+
+To be updated.
 
 
-# More Updates to Come
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b testbranch/solvers`)
+3. Commit your Changes (`git commit -m 'Improve testbranch/solvers'`)
+4. Push to the Branch (`git push origin testbranch/solvers`)
+5. Open a Pull Request
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the BSD-2-Clause License. See `LICENSE` for more information.
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Sin Yong Teng: tsyet12@gmail.com
+
+Project Link: [https://github.com/tsyet12/EvoOpt](https://github.com/tsyet12/EvoOpt)
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
