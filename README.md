@@ -1,6 +1,15 @@
 # EvoOpt - Evolutionary Optimization in Python
 
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
+<h3 align="center"> EvoOpt: Evolutionary Optimization in Python </h3>
+
+<p align="center">
+	* Open sourced * Automatically Vectorized * Fast Computation * One Library Do-it-all
+	<br/>
+	<a href="https://github.com/tsyet12/issues">Report Bug</a>
+	
+	<a href="https://github.com/tsyet12/issues">Request Feature</a>
+</p>
 
 ![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
 ![PyPI-Status](https://img.shields.io/pypi/status/EvoOpt.svg?color=blue)
