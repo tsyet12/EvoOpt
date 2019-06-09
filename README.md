@@ -29,8 +29,27 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 ** This library is implemented in Numpy (which was written in C) for fast processing speed**
 
 
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-# Current support for algorithms:
+* [About the Project](#about-the-project)
+  * [Current support for algorithms](#current-support-for-algorithms)
+* [Getting Started](#getting-started)
+  * [Dependencies](#dependencies)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+
+
+## Current support for algorithms
 
 [x] Genetic Algorithm
 
@@ -50,7 +69,8 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 More algorithms to come...
 
-# Quick Example
+<!-- GETTING STARTED -->
+## Getting Started
 
 **There are four simple steps to run an optimization problem using EvoOpt**
 
@@ -105,12 +125,12 @@ DA.solve(plot=True)
 ```
 
 
-# Results
+** Example Result **
 ![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
 
 
 
-# Dependencies
+## Dependencies
 Numpy and Matplotlib
 
 Windows:
@@ -127,7 +147,7 @@ $pip install numpy matplotlib
 ```
 
 
-# Installing EvoOpt
+## Installation
 
 You can use two methods for installation:
 
