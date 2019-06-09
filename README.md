@@ -34,6 +34,8 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [ ] Grey-Wolf Optimization
 
+More algorithms to come...
+
 # Quick Example
 
 **There are four simple steps to run an optimization problem using EvoOpt**
