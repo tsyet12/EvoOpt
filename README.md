@@ -8,8 +8,8 @@
 <p align="center">
 	* Open sourced * Automatically Vectorized * Fast Computation * One Library Do-it-all
 	<br/>
-	<li><a href="https://github.com/tsyet12/issues">Report Bug</a>
-	<a href="https://github.com/tsyet12/issues">Request Feature</a></li>
+	<a href="https://github.com/tsyet12/issues">Report Bug</a>
+	<a href="https://github.com/tsyet12/issues">Request Feature</a>
 </p>
 </div>
 
