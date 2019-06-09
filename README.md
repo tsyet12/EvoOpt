@@ -8,7 +8,7 @@
 <p align="center">
 	* Open sourced * Automatically Vectorized * Fast Computation * One Library Do-it-all
 	<br/>
-	<h3 display="inline" align="center"><a href="https://github.com/tsyet12/issues">Report Bug</a>
+	<h3 align="center"><a href="https://github.com/tsyet12/issues">Report Bug</a>
 		 · 
 		<a href="https://github.com/tsyet12/issues">      Request Feature</a></h3>
 </p>
@@ -183,11 +183,42 @@ $ pip install EvoOpt
 ```
 
 Windows:
+'''BASH
+$python -m pip install EvoOpt
+'''
 
-```BASH
-$ python -m pip install EvoOpt
-```
+<!-- USAGE EXAMPLES -->
+## Usage
+
+To be updated.
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the BSD-2-Clause License. See `LICENSE` for more information.
 
 
 
-# More Updates to Come
+<!-- CONTACT -->
+## Contact
+
+Sin Yong Teng: tsyet12@gmail.com
+
+Project Link: [https://github.com/tsyet12/EvoOpt](https://github.com/tsyet12/EvoOpt)
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
