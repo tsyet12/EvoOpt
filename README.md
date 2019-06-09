@@ -1,28 +1,18 @@
 # EvoOpt - Evolutionary Optimization in Python
 
-<style type="text/css">
-.mylinks li{
-    float:left;   /* Fit all your links nicely in one line*/
-    margin:0 5px; /* Give them to the left and right a little room to breathe */
-    /* You can adjust the space by modifying the 5px value, */
-    /* the 0 modifies the top/bottom spacing */
-}
-
-.mylinks a{
-   color:red; /* fancy red color for your links*/
-}
-</style>
-
 
 ![EvoOpt Logo](https://user-images.githubusercontent.com/19692103/58713060-1de5bc00-83c2-11e9-8213-bf69e3382321.jpg)
 <h3 align="center"> EvoOpt: Evolutionary Optimization in Python </h3>
 
+<div id="Navigation">
 <p align="center">
 	* Open sourced * Automatically Vectorized * Fast Computation * One Library Do-it-all
 	<br/>
 	<li><a href="https://github.com/tsyet12/issues">Report Bug</a></li>
 	<li><a href="https://github.com/tsyet12/issues">Request Feature</a></li>
 </p>
+</div>
+
 
 ![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
 ![PyPI-Status](https://img.shields.io/pypi/status/EvoOpt.svg?color=blue)
