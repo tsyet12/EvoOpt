@@ -135,11 +135,6 @@ Run setup. The following command installs all files in directory:
 $ pip install -e .
 ```
 
-Move to examples and run the examples
-
-```BASH
-$ cd examples
-```
 
 **1. Install from pip **
 
