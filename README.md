@@ -26,7 +26,7 @@
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
 
-** This library is implemented in Numpy (which was written in C) for fast processing speed**
+**This library is implemented in Numpy (which was written in C) for fast processing speed**
 
 
 <!-- TABLE OF CONTENTS -->
@@ -76,26 +76,26 @@ More algorithms to come...
 
 (Example 2 from example folder)
 
-** Prerequisites **
+**Prerequisites**
 
 ```python
 from solver.DuelistAlgorithm import DuelistAlgorithm
 ```
 
-** 1. Define your function. Say you want to minimize the equation f=(x1,x2) = (x1)^2+(x2)^2 **
+**1. Define your function. Say you want to minimize the equation f=(x1,x2) = (x1)^2+(x2)^2 **
 
 ```python
 def f(x1,x2):
 	return x1*x1+x2*x2
 ```
 
-** 2. Define the variables that can be *manipulated* for optimization. Define their names as string and put them in an array. **
+**2. Define the variables that can be *manipulated* for optimization. Define their names as string and put them in an array. **
 
 ```python
 x=["x1","x2"]
 ```
 
-** 3. Define the boundaries for the manipulated variables:**
+**3. Define the boundaries for the manipulated variables:**
 
  Say:
 
@@ -117,7 +117,7 @@ The corresponding code is:
  xmax=[10,15]
 ```
 
-** 4. Setup the solver and start the solve procedure. **
+**4. Setup the solver and start the solve procedure. **
 
 ```python
 DA=DuelistAlgorithm(f,x,xmin,xmax,max_gen=1000)
@@ -125,7 +125,7 @@ DA.solve(plot=True)
 ```
 
 
-** Example Result **
+**Example Result **
 ![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
 
 
@@ -183,9 +183,9 @@ $ pip install EvoOpt
 ```
 
 Windows:
-'''BASH
+```BASH
 $python -m pip install EvoOpt
-'''
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -199,9 +199,9 @@ To be updated.
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch (`git checkout -b testbranch/solvers`)
+3. Commit your Changes (`git commit -m 'Improve testbranch/solvers'`)
+4. Push to the Branch (`git push origin testbranch/solvers`)
 5. Open a Pull Request
 
 
