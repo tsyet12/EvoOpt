@@ -22,9 +22,7 @@
 ![PyPI-Implementation](https://img.shields.io/pypi/implementation/EvoOpt.svg)
 ![Python Version](https://img.shields.io/pypi/pyversions/EvoOpt.svg)
 ![PyPI-License](https://img.shields.io/pypi/l/EvoOpt.svg?color=Green)
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/teng-sin-yong-richard-a18993123/
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555)[https://www.linkedin.com/in/teng-sin-yong-richard-a18993123/]]
 [![DOI](https://zenodo.org/badge/186832141.svg)](https://zenodo.org/badge/latestdoi/186832141)
 
 Python implementation of state-of-art meta-heuristic and evolutionary optimisation algorithms. 
