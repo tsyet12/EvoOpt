@@ -118,7 +118,7 @@ The corresponding code is:
  xmax=[10,15]
 ```
 
-**4. Setup the solver and start the solve procedure. **
+**4. Setup the solver and start the solve procedure.**
 
 ```python
 DA=DuelistAlgorithm(f,x,xmin,xmax,max_gen=1000)
@@ -126,7 +126,8 @@ DA.solve(plot=True)
 ```
 
 
-**Example Result **
+**Example Result**
+
 ![Result Image](https://user-images.githubusercontent.com/19692103/58713291-892f8e00-83c2-11e9-8756-e27967c32453.png)
 
 
