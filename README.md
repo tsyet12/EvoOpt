@@ -64,9 +64,9 @@ Python implementation of state-of-art meta-heuristic and evolutionary optimisati
 
 [X] Simulated Annealing
 
-[ ] Multi-Verse Optimization
+[X] Multi-Verse Optimization
 
-[ ] Grey-Wolf Optimization
+[X] Grey-Wolf Optimization
 
 More algorithms to come...
 
