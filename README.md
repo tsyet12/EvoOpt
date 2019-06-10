@@ -15,9 +15,9 @@
 </div>
 
 
-![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)
-![PyPI-Status](https://img.shields.io/pypi/status/EvoOpt.svg?color=blue)
-![PyPI](https://img.shields.io/pypi/v/EvoOpt.svg?color=green) 
+[![Build Status](https://travis-ci.com/tsyet12/EvoOpt.svg?branch=master)](https://travis-ci.com/tsyet12/EvoOpt)
+[![PyPI-Status](https://img.shields.io/pypi/status/EvoOpt.svg?color=blue)](https://pypi.org/project/EvoOpt/)
+[![PyPI](https://img.shields.io/pypi/v/EvoOpt.svg?color=green)](https://pypi.org/project/EvoOpt/)
 ![dependencies](https://img.shields.io/librariesio/github/tsyet12/EvoOpt.svg)
 ![PyPI-Implementation](https://img.shields.io/pypi/implementation/EvoOpt.svg)
 ![Python Version](https://img.shields.io/pypi/pyversions/EvoOpt.svg)
