@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 setup(name='EvoOpt', 
-version='0.13', 
+version='0.14', 
 license='BSD 2-Clause',
 description="EvoOpt: Python Implementation of State-of-Art Evolutionary Algorithms",
 author='Sin Yong Teng',

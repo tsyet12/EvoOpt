@@ -158,9 +158,11 @@ class GreyWolfOptimizer():
         mp.ylabel("Second Dimension",fontsize=axis_font, fontweight=axis_weight)
         mp.xlabel("First Dimension",fontsize=axis_font, fontweight=axis_weight)
         mp.autoscale()
-        
-        mng = mp.get_current_fig_manager()
-        mng.window.state('zoomed')
+        try:
+            mng = mp.get_current_fig_manager()
+            mng.window.state('zoomed')
+        except:
+            print("Format your plot using: matplotlib.rcParams['figure.figsize'] = [width, height]")
         mp.show()
 
 if __name__=="__main__":
@@ -170,7 +172,7 @@ if __name__=="__main__":
         return y
     
     #(self,f,x,lb,ub,pop=200,max_gen=50,min=0.2,max=1,p=6,verbose=True):
-    gwo=GreyWolfOptimizer(f,["x1","x2","x3"],[0,0,5],[100,50,100],pop=200,max_gen=1000,a_max=2,a_min=0,verbose=True)
+    gwo=GreyWolfOptimizer(f,["x1","x2","x3"],[0,0,5],[100,50,100],pop=200,max_gen=100,a_max=2,a_min=0,verbose=True)
     gwo.solve()
     gwo.plot_result()   
     

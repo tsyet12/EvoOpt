@@ -134,7 +134,7 @@ class GeneticAlgorithm():
             
             
 
-    def plot_result(self,contour_density=50):
+    def plot_result(self,windows=True,contour_density=50):
         subtitle_font=16
         axis_font=14
         title_weight="bold"
@@ -196,8 +196,11 @@ class GeneticAlgorithm():
         mp.xlabel("First Dimension",fontsize=axis_font, fontweight=axis_weight)
         mp.autoscale()
         
-        mng = mp.get_current_fig_manager()
-        mng.window.state('zoomed')
+        try:
+            mng = mp.get_current_fig_manager()
+            mng.window.state('zoomed')
+        except:
+            print("Format your plot using: matplotlib.rcParams['figure.figsize'] = [width, height]")
         mp.show()
 
 if __name__=="__main__":

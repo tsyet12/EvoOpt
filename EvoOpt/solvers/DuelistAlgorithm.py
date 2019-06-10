@@ -271,9 +271,11 @@ class DuelistAlgorithm():
 		mp.ylabel("Second Dimension",fontsize=axis_font, fontweight=axis_weight)
 		mp.xlabel("First Dimension",fontsize=axis_font, fontweight=axis_weight)
 		mp.autoscale()
-
-		mng = mp.get_current_fig_manager()
-		mng.window.state('zoomed')
+		try:
+			mng = mp.get_current_fig_manager()
+			mng.window.state('zoomed')
+		except:
+			print("Format your plot using: matplotlib.rcParams['figure.figsize'] = [width, height]")
 		mp.show()
     
 	@property
