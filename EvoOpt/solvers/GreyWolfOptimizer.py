@@ -58,6 +58,7 @@ class GreyWolfOptimizer():
         self.xp=np.clip(np.average(self.pop_mat[:self.good_wolf,:],axis=0),self.lb,self.ub)
        
     def update(self,generation):
+        '''
         vec_a=np.full(shape=(len(self.x),1),fill_value=self.a[generation])
         r1=np.random.rand(*vec_a.shape)
         r2=np.random.rand(*vec_a.shape)
@@ -67,14 +68,47 @@ class GreyWolfOptimizer():
             np.tile(self.xp,self.pop-self.good_wolf).reshape((len(self.x),self.pop-self.good_wolf)).T \
             -self.pop_mat[self.good_wolf:,:])
         
-        self.pop_mat[self.good_wolf:,:]=self.pop_mat[self.good_wolf:,:]-A*D
+        
         
         r1_s=np.random.rand(*self.pop_mat[:self.good_wolf,:].shape)
         r2_s=np.random.rand(*self.pop_mat[:self.good_wolf,:].shape)        
         
         D_s=np.abs((2*r2_s)*self.pop_mat[:self.good_wolf,:]-np.tile(self.xp,self.good_wolf).reshape((len(self.x),self.good_wolf)).T)
         self.pop_mat[:self.good_wolf,:]=self.pop_mat[:self.good_wolf,:]-(2*self.a[generation]*r1_s-self.a[generation])*D_s
+                
+        self.pop_mat[self.good_wolf:,:]=np.tile(np.average(self.pop_mat[:self.good_wolf,:],axis=1),self.pop-self.good_wolf).reshape(self.pop-self.good_wolf,len(self.x))-A*D
+        '''
+        alpha_pos=np.tile(self.pop_mat[0,:],self.pop).reshape(self.pop, len(self.x))
+        beta_pos=np.tile(self.pop_mat[1,:],self.pop).reshape(self.pop, len(self.x))
+        gamma_pos=np.tile(self.pop_mat[2,:],self.pop).reshape(self.pop, len(self.x))
         
+        vec_a=np.full(shape=(alpha_pos.shape[0],alpha_pos.shape[1]),fill_value=self.a[generation])
+        
+        r1_alpha=np.random.rand(*vec_a.shape)
+        r2_alpha=np.random.rand(*vec_a.shape)
+        r1_beta=np.random.rand(*vec_a.shape)
+        r2_beta=np.random.rand(*vec_a.shape)
+        r1_gamma=np.random.rand(*vec_a.shape)
+        r2_gamma=np.random.rand(*vec_a.shape)
+        
+        A_alpha=2*vec_a*r1_alpha-vec_a 
+        A_beta=2*vec_a*r1_beta-vec_a 
+        A_gamma=2*vec_a*r1_gamma-vec_a
+        
+        C_alpha=2*r2_alpha
+        C_beta=2*r2_beta
+        C_gamma=2*r2_gamma
+
+        D_alpha=abs(C_alpha*alpha_pos-self.pop_mat)
+        D_beta=abs(C_beta*beta_pos-self.pop_mat)
+        D_gamma=abs(C_gamma*gamma_pos-self.pop_mat)
+        
+        X_alpha=alpha_pos-A_alpha*D_alpha
+        X_beta=beta_pos-A_beta*D_beta
+        X_gamma=gamma_pos-A_gamma*D_gamma
+        
+        self.pop_mat=(X_alpha+X_beta+X_gamma)/3
+                
         self.pop_mat=np.clip(self.pop_mat,self.lb,self.ub)
 
         
@@ -172,7 +206,7 @@ if __name__=="__main__":
         return y
     
     #(self,f,x,lb,ub,pop=200,max_gen=50,min=0.2,max=1,p=6,verbose=True):
-    gwo=GreyWolfOptimizer(f,["x1","x2","x3"],[0,0,5],[100,50,100],pop=200,max_gen=100,a_max=2,a_min=0,verbose=True)
+    gwo=GreyWolfOptimizer(f,["x1","x2","x3"],[0,0,5],[100,50,100],pop=50,max_gen=200,a_max=2,a_min=0,verbose=True)
     gwo.solve()
     gwo.plot_result()   
     
