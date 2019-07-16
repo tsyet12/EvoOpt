@@ -210,7 +210,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the BSD-2-Clause License. See `LICENSE` for more information.
+Distributed under the BSD-2-Clause License. See `LICENSE` [https://github.com/tsyet12/EvoOpt/blob/master/LICENSE] for more information.
 
 
 
