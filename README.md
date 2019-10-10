@@ -80,7 +80,7 @@ More algorithms to come...
 **Prerequisites**
 
 ```python
-from solver.DuelistAlgorithm import DuelistAlgorithm
+from EvoOpt.solver.DuelistAlgorithm import DuelistAlgorithm
 ```
 
 **1. Define your function. Say you want to minimize the equation f=(x1,x2) = (x1)^2+(x2)^2 **
