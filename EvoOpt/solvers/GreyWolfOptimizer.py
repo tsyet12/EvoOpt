@@ -141,7 +141,7 @@ class GreyWolfOptimizer():
 		
         fig=mp.figure()
         
-        fig.suptitle("Multi-Verse Optimization", fontsize=20, fontweight=title_weight)
+        fig.suptitle("Grey Wolf Optimizer", fontsize=20, fontweight=title_weight)
         fig.tight_layout()
         mp.subplots_adjust(hspace=0.3,wspace=0.3)
         mp.rc('xtick',labelsize=tick_font)
